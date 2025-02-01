@@ -9,9 +9,9 @@ import SwiftUI
 
 class LandmarkViewModel: ObservableObject {
     @Published var landmarks: [Landmark] = [
-        Landmark(name: "Eiffel Tower", isDone: false),
-        Landmark(name: "Statue of Liberty", isDone: false),
-        Landmark(name: "Great Wall of China", isDone: false)
+        Landmark(name: "Eiffel Tower", description: "An iconic symbol of Paris.", isDone: false),
+        Landmark(name: "Statue of Liberty", description: "A gift from France to the USA.", isDone: false),
+        Landmark(name: "Great Wall of China", description: "A historic wall stretching across China.", isDone: false)
     ]
 
     func markAsDone(index: Int, with image: UIImage) {
@@ -19,9 +19,9 @@ class LandmarkViewModel: ObservableObject {
         landmarks[index].image = image
     }
 
-    func addLandmark(name: String) {
+    func addLandmark(name: String, description: String) {
         guard !name.isEmpty else { return }
-        let newLandmark = Landmark(name: name, isDone: false)
+        let newLandmark = Landmark(name: name, description: description, isDone: false)
         landmarks.append(newLandmark)
     }
 
