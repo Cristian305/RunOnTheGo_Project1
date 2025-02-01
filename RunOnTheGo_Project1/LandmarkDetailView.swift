@@ -13,7 +13,7 @@ struct LandmarkDetailView: View {
     @Binding var landmark: Landmark
     @State private var showImagePicker = false
     @State private var showCameraPicker = false
-    @State private var selectedImage: UIImage?  
+    @State private var selectedImage: UIImage?
     @State private var imageLocation: CLLocationCoordinate2D? // Location of the image
     @State private var annotations: [IdentifiablePointAnnotation] = [] // Updated to use Identifiable struct
     @State private var region = MKCoordinateRegion(
@@ -25,6 +25,11 @@ struct LandmarkDetailView: View {
         VStack {
             Text(landmark.name)
                 .font(.largeTitle)
+                .bold()
+            Text(landmark.description)
+                .font(.body)
+                .foregroundColor(.secondary)
+                .padding(.bottom)
 
             // Map View
             Map(coordinateRegion: $region, annotationItems: annotations) { annotation in
