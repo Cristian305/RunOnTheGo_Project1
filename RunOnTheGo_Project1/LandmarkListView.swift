@@ -57,6 +57,7 @@ struct AddLandmarkView: View {
     @ObservedObject var viewModel: LandmarkViewModel
     @Environment(\.presentationMode) var presentationMode // To dismiss the sheet
     @State private var newLandmarkName: String = ""
+    @State private var newLandmarkDescription: String = ""
 
     var body: some View {
         NavigationView {
@@ -65,8 +66,12 @@ struct AddLandmarkView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
 
+                TextField("Enter landmark description", text: $newLandmarkDescription)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+
                 Button(action: {
-                    viewModel.addLandmark(name: newLandmarkName)
+                    viewModel.addLandmark(name: newLandmarkName, description: newLandmarkDescription)
                     presentationMode.wrappedValue.dismiss() // Close the sheet
                 }) {
                     Text("Add Landmark")
@@ -75,7 +80,7 @@ struct AddLandmarkView: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }
-                .disabled(newLandmarkName.isEmpty) // Disable if input is empty
+                .disabled(newLandmarkName.isEmpty || newLandmarkDescription.isEmpty) // Disable if input is empty
                 .padding()
 
                 Spacer()
